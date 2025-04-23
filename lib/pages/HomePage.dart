@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hack_for_food/pages/AddDonationPage.dart';
+
+import 'package:hack_for_food/pages/AddDonationScreen.dart';
 import 'package:hack_for_food/util/Widget_Button.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,9 +14,12 @@ class _HomePageState extends State<HomePage> {
 
 
   void go_publier(){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDonationPage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDonationScreen()));
   }
-  void go_difuser (){}
+  void go_difuser (){
+    
+    // Navigator.push(context, MaterialPageRoute(builder: (context)=>()));
+  }
   void go_association(){}
   void go_profile(){}
 
