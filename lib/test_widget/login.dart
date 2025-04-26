@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hack_for_food/pages/SignUp.dart';
+import 'package:hack_for_food/pages/routes_pages.dart';
 
 class LoginScreen_01 extends StatefulWidget {
   final String userType; // 'donor' ou 'association'
@@ -191,12 +192,25 @@ class _LoginScreenState extends State<LoginScreen_01> {
                 ? const CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 )
-                : const Text(
-                  'SE CONNECTER',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                : GestureDetector(
+                  onTap: (){
+                    if (widget.userType == 'association'){
+                      isAssociation=true;
+                    }else{
+                      isAssociation=false;
+                    }
+                    Navigator.push(context, MaterialPageRoute(builder:(context)=> RoutesPages(
+                      userType: isAssociation ? 'association' : 'donor',
+                      
+                    )));
+                  },
+                  child: const Text(
+                    'SE CONNECTER',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
       ),
@@ -229,7 +243,6 @@ class _LoginScreenState extends State<LoginScreen_01> {
                       MaterialPageRoute(
                         builder:
                             (context) => SignUp(
-                              
                               userType: isAssociation ? 'association' : 'donor',
                             ),
                       ),

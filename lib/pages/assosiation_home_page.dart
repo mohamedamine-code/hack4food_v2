@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:hack_for_food/pages/AddDonationScreen.dart';
 import 'package:hack_for_food/util/Widget_Button.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class AssosiationHomePage extends StatefulWidget {
+  const AssosiationHomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<AssosiationHomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<AssosiationHomePage> {
 
 
   void go_publier(){
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     List MyList=[
     ['List des Don','assets/img/file.png',Colors.green,go_publier],
-    ['Profile Association','assets/img/boy.png',Colors.deepPurple,go_profile],
+    ['Association','assets/img/boy.png',Colors.deepPurple,go_profile],
   ];
 
     return Scaffold(

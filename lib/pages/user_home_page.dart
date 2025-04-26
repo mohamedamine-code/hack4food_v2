@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:hack_for_food/pages/AddDonationScreen.dart';
 import 'package:hack_for_food/util/Widget_Button.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class UserHomePage extends StatefulWidget {
+  const UserHomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<UserHomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<UserHomePage> {
 
 
   void go_publier(){
