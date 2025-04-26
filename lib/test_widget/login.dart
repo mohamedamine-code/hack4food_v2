@@ -5,7 +5,7 @@ import 'package:hack_for_food/pages/SignUp.dart';
 import 'package:hack_for_food/pages/routes_pages.dart';
 
 class LoginScreen_01 extends StatefulWidget {
-  final String userType; // 'donor' ou 'association'
+  final String userType; // 'donor' or 'association'
 
   const LoginScreen_01({super.key, required this.userType});
 
@@ -14,7 +14,6 @@ class LoginScreen_01 extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen_01> {
-  bool isAssociation = false; // ou false
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -33,23 +32,40 @@ class _LoginScreenState extends State<LoginScreen_01> {
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
+      
+      // Simulate network request
       await Future.delayed(const Duration(seconds: 2));
-
+      
       if (!mounted) return;
       setState(() => _isLoading = false);
 
-      if (widget.userType == 'association') {
-        Navigator.pushReplacementNamed(context, '/association-dashboard');
-      } else {
-        Navigator.pushReplacementNamed(context, '/donor-dashboard');
-      }
+      // Navigate based on user type
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RoutesPages(
+            userType: widget.userType,
+          ),
+        ),
+      );
     }
+  }
+
+  void _navigateToSignUp() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SignUp(
+          userType: widget.userType,
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE8F5E9), // Light eco green
+      backgroundColor: const Color(0xFFE8F5E9),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,
         child: GestureDetector(
@@ -133,20 +149,19 @@ class _LoginScreenState extends State<LoginScreen_01> {
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon, color: Colors.green.shade700),
-        suffixIcon:
-            isPassword
-                ? IconButton(
-                  icon: Icon(
-                    _obscurePassword ? Icons.visibility : Icons.visibility_off,
-                    color: Colors.green.shade700,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _obscurePassword = !_obscurePassword;
-                    });
-                  },
-                )
-                : null,
+        suffixIcon: isPassword
+            ? IconButton(
+                icon: Icon(
+                  _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.green.shade700,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscurePassword = !_obscurePassword;
+                  });
+                },
+              )
+            : null,
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(
@@ -158,13 +173,11 @@ class _LoginScreenState extends State<LoginScreen_01> {
           borderSide: const BorderSide(color: Colors.transparent),
         ),
       ),
-
       validator: (value) {
         if (value == null || value.isEmpty) {
           return validatorMsg;
         }
-        if (isEmail &&
-            !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+        if (isEmail && !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
           return 'Veuillez entrer un email valide';
         }
         if (isPassword && value.length < 6) {
@@ -187,32 +200,18 @@ class _LoginScreenState extends State<LoginScreen_01> {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        child:
-            _isLoading
-                ? const CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                )
-                : GestureDetector(
-                  onTap: (){
-                    if (widget.userType == 'association'){
-                      isAssociation=true;
-                    }else{
-                      isAssociation=false;
-                    }
-                    Navigator.push(context, MaterialPageRoute(builder:(context)=> RoutesPages(
-                      userType: isAssociation ? 'association' : 'donor',
-                      
-                    )));
-                  },
-                  child: const Text(
-                    'SE CONNECTER',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
+        child: _isLoading
+            ? const CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              )
+            : const Text(
+                'SE CONNECTER',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
+              ),
       ),
     );
   }
@@ -230,24 +229,7 @@ class _LoginScreenState extends State<LoginScreen_01> {
               fontWeight: FontWeight.bold,
               decoration: TextDecoration.underline,
             ),
-            recognizer:
-                TapGestureRecognizer()
-                  ..onTap = () {
-                    if (widget.userType == 'association'){
-                      isAssociation=true;
-                    }else{
-                      isAssociation=false;
-                    }
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) => SignUp(
-                              userType: isAssociation ? 'association' : 'donor',
-                            ),
-                      ),
-                    );
-                  },
+            recognizer: TapGestureRecognizer()..onTap = _navigateToSignUp,
           ),
         ],
       ),

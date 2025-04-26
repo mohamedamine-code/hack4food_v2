@@ -53,21 +53,6 @@ class _ListeState extends State<Liste> {
           return _buildDonationCard(_donations[index]);
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddDonationScreen(),
-            ),
-          ).then((_) {
-            // Rafraîchir la liste après avoir ajouté un don
-            setState(() {});
-          });
-        },
-      ),
     );
   }
 

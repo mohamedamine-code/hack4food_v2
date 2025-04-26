@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:hack_for_food/pages/AddDonationScreen.dart';
+import 'package:hack_for_food/pages/list_of_donation.dart';
+import 'package:hack_for_food/pages/profile_asso.dart';
 import 'package:hack_for_food/util/Widget_Button.dart';
 
 class AssosiationHomePage extends StatefulWidget {
@@ -16,19 +18,21 @@ class _HomePageState extends State<AssosiationHomePage> {
   void go_publier(){
     Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDonationScreen()));
   }
-  void go_difuser (){
+  void go_tolist(){
     
-    // Navigator.push(context, MaterialPageRoute(builder: (context)=>()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>Liste()));
   }
-  void go_association(){}
+  void go_profile_assocition(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>AssociationProfileScreen()));
+  }
   void go_profile(){}
 
 
   @override
   Widget build(BuildContext context) {
     List MyList=[
-    ['List des Don','assets/img/file.png',Colors.green,go_publier],
-    ['Association','assets/img/boy.png',Colors.deepPurple,go_profile],
+    ['List des Don','assets/img/file.png',Colors.green,go_tolist],
+    ['Association','assets/img/boy.png',Colors.deepPurple,go_profile_assocition],
   ];
 
     return Scaffold(
@@ -49,7 +53,7 @@ class _HomePageState extends State<AssosiationHomePage> {
                 Container(
                   child: Column(
                     children: [
-                      Container(
+                      Container( 
                     child: Text(
                       'ZADNA! مرحبا بك في ',
                       style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
@@ -89,7 +93,7 @@ class _HomePageState extends State<AssosiationHomePage> {
                     itemCount: MyList.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 1.7/2,
+                      childAspectRatio: 1.7/2.5,
                     ),
                     itemBuilder: (context, index) {
                       return Widget_Button(

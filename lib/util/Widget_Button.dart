@@ -17,7 +17,7 @@ class Widget_Button extends StatelessWidget {
         },
         child: Container(
           padding: EdgeInsets.all(15),
-          height: 300,
+          height: 400,
           width: 150,
           decoration: BoxDecoration(
             boxShadow: [
@@ -39,7 +39,7 @@ class Widget_Button extends StatelessWidget {
               SizedBox(
                 height: 50,
               ),
-              Text(data,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),)
+              Text(data,textAlign: TextAlign.center,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),)
             ],
           ),
         ),
