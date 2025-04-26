@@ -95,6 +95,7 @@ class _AddDonationScreenState extends State<AddDonationScreen> {
     }
     return true;
   }
+  
 
   @override
   Widget build(BuildContext context) {

@@ -28,8 +28,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     List MyList=[
     ['Publier un Don','assets/img/file.png',Colors.green,go_publier],
-    ['Defisser','assets/img/versus.png',Colors.blue,go_difuser],
-    ['Association','assets/img/community.png',Colors.deepOrange,go_association],
     ['Profile','assets/img/boy.png',Colors.deepPurple,go_profile],
   ];
 
@@ -88,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                   height: 450,
                   // width: 500,
                   child: GridView.builder(
-                    itemCount: 4,
+                    itemCount: MyList.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 1.7/2,
