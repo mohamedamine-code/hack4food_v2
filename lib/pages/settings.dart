@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hack_for_food/pages/about.dart';
+import 'package:hack_for_food/pages/aide_support.dart';
+import 'package:hack_for_food/pages/politique_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -165,7 +168,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
   // Méthodes de navigation (à implémenter)
   void _navigateToEditProfile() {}
   void _navigateToChangePassword() {}
-  void _openPrivacyPolicy() {}
-  void _navigateToHelp() {}
-  void _navigateToAbout() {}
+  void _openPrivacyPolicy() {
+    Navigator.push(context,MaterialPageRoute(builder: (context)=>PrivacyPolicyScreen()));
+  }
+  void _navigateToAbout() {
+    
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutFoodWasteWidget()));
+
+  }
+  void _navigateToHelp(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>AideSupportScreen()));
+  }
 }

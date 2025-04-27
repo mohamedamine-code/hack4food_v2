@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hack_for_food/pages/AddDonationScreen.dart';
 import 'package:hack_for_food/pages/list_of_donation.dart';
 import 'package:hack_for_food/pages/profile_asso.dart';
+import 'package:hack_for_food/pages/settings.dart';
+import 'package:hack_for_food/test_widget/donner_Type_user.dart';
 import 'package:hack_for_food/util/Widget_Button.dart';
 
 class AssosiationHomePage extends StatefulWidget {
@@ -26,7 +28,21 @@ class _HomePageState extends State<AssosiationHomePage> {
     Navigator.push(context, MaterialPageRoute(builder: (context)=>AssociationProfileScreen()));
   }
   void go_profile(){}
-
+  void _openSettings() {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const SettingsScreen()),
+    );
+  }
+  void _logout() async {
+    // Implémentation de la déconnexion
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const DonorTypePage()),
+      (route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +52,44 @@ class _HomePageState extends State<AssosiationHomePage> {
   ];
 
     return Scaffold(
+      drawer: Drawer(
+      backgroundColor: const Color(0xFFE8F5E9),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(color: Colors.green.shade700),
+            child: const Text(
+              'Menu',
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.dashboard),
+            title: const Text('Tableau de bord'),
+            onTap: () {
+              Navigator.pop(context);
+              // Navigation vers le dashboard si nécessaire
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: const Text('Paramètres'),
+            onTap: _openSettings,
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.logout, color: Colors.red),
+            title: const Text('Déconnexion', style: TextStyle(color: Colors.red)),
+            onTap: _logout,
+          ),
+        ],
+      ),
+    ),
       appBar: AppBar(
-        leading: IconButton(onPressed: (){}, icon: Icon(Icons.menu,size: 30,)),
+        leading: IconButton(onPressed: (){
+          
+        }, icon: Icon(Icons.menu,size: 30,)),
         actions: [
           IconButton(onPressed: (){}, icon: Icon(Icons.notification_add,color: Colors.black,size: 30,))
         ],
