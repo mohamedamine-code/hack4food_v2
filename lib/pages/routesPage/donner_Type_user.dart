@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:hack_for_food/test_widget/login.dart';
+import 'package:hack_for_food/pages/SignIn_SignUp/login.dart';
 
 class DonorTypePage extends StatelessWidget {
   const DonorTypePage({super.key});
@@ -8,43 +8,49 @@ class DonorTypePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE8F5E9), // Light green background
+      backgroundColor: Color(0xFFE8F5E9) ,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF4CAF50), // Green app bar
+        backgroundColor: Colors.green,
         elevation: 0,
         centerTitle: true,
         title: const Text(
           'Choisir votre profil',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold, color: Colors.black),
         ),
-        automaticallyImplyLeading: false, // Remove back arrow
+        automaticallyImplyLeading: false, 
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 17),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Vous êtes :',
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF2E7D32),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 0),
+                child: const Text(
+                  'Bienvenue ! ',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
                 ),
               ),
-              const SizedBox(height: 40),
+              SizedBox(
+                height: 80,
+              ),
+              
               _buildDonorTypeCard(
                 context,
-                title: 'Donneur Individuel',
-                icon: Icons.person_outline,
+                title: 'Donneur',
+                path: 'assets/img/man.png',
                 onTap: () => _navigateToLogin(context, isAssociation: false),
               ),
               const SizedBox(height: 30),
               _buildDonorTypeCard(
                 context,
                 title: 'Association',
-                icon: Icons.groups,
+                path: 'assets/img/community.png',
                 onTap: () => _navigateToLogin(context, isAssociation: true),
               ),
             ],
@@ -57,7 +63,7 @@ class DonorTypePage extends StatelessWidget {
   Widget _buildDonorTypeCard(
     BuildContext context, {
     required String title,
-    required IconData icon,
+    required String path,
     required VoidCallback onTap,
   }) {
     return InkWell(
@@ -78,7 +84,7 @@ class DonorTypePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 12),
-            Icon(icon, size: 70, color: const Color(0xFF2E7D32)),
+            Image.asset(path, width: 90,),
             const SizedBox(height: 30),
             Text(
               title,

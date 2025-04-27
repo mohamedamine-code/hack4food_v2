@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:hack_for_food/pages/AddDonationScreen.dart';
-import 'package:hack_for_food/pages/list_of_donation.dart';
-import 'package:hack_for_food/pages/profile_asso.dart';
-import 'package:hack_for_food/pages/settings.dart';
-import 'package:hack_for_food/test_widget/donner_Type_user.dart';
+import 'package:hack_for_food/pages/screens/AddDonationScreen.dart';
+import 'package:hack_for_food/pages/screens/list_of_donation.dart';
+import 'package:hack_for_food/pages/outils/profile_asso.dart';
+import 'package:hack_for_food/pages/outils/settings.dart';
+import 'package:hack_for_food/pages/routesPage/donner_Type_user.dart';
 import 'package:hack_for_food/util/Widget_Button.dart';
 
 class AssosiationHomePage extends StatefulWidget {
@@ -15,7 +15,18 @@ class AssosiationHomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<AssosiationHomePage> {
-
+   void _showNotifications(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Aucune nouvelle notification'),
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
+  }
+  final Color primaryColor = Colors.green.shade700;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void go_publier(){
     Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDonationScreen()));
@@ -35,12 +46,11 @@ class _HomePageState extends State<AssosiationHomePage> {
       MaterialPageRoute(builder: (context) => const SettingsScreen()),
     );
   }
-  void _logout() async {
-    // Implémentation de la déconnexion
-    Navigator.pushAndRemoveUntil(
+  void _logout(){
+    Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const DonorTypePage()),
-      (route) => false,
+      MaterialPageRoute(builder: (context) =>DonorTypePage()),
+      
     );
   }
 
@@ -87,11 +97,15 @@ class _HomePageState extends State<AssosiationHomePage> {
       ),
     ),
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-          
-        }, icon: Icon(Icons.menu,size: 30,)),
+        leading: IconButton(
+          icon: const Icon(Icons.menu, size: 30),
+          onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+        ),
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.notification_add,color: Colors.black,size: 30,))
+          IconButton(
+          icon: const Icon(Icons.notifications_outlined, size: 30),
+          onPressed: () => _showNotifications(context),
+          )
         ],
       ),
       body: Padding(
@@ -105,34 +119,37 @@ class _HomePageState extends State<AssosiationHomePage> {
                 Container(
                   child: Column(
                     children: [
-                      Container( 
-                    child: Text(
-                      'ZADNA! مرحبا بك في ',
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Bienvenue sur ',
-                          style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'ZADEN !',
-                          style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    
-                  ),
+                      Text(
+          'MealSaver! مرحبا بك في',
+          style: TextStyle(
+            fontSize: 23,
+            fontWeight: FontWeight.bold,
+            color: primaryColor,
+          ),
+        ),
+        const SizedBox(height: 10),
+        RichText(
+          text: TextSpan(
+            style: const TextStyle(
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+            children: [
+              const TextSpan(text: 'Bienvenue sur '),
+              TextSpan(
+                text: 'MealSaver !',
+                style: TextStyle(color: primaryColor),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Text(
+          'Plateforme de dons alimentaires',
+          style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+          textAlign: TextAlign.center,
+        ),
                     ],
                   ),
                 ),
@@ -141,12 +158,8 @@ class _HomePageState extends State<AssosiationHomePage> {
                 SizedBox(
                   height: 450,
                   // width: 500,
-                  child: GridView.builder(
+                  child: ListView.builder(
                     itemCount: MyList.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.7/2.5,
-                    ),
                     itemBuilder: (context, index) {
                       return Widget_Button(
                         funcction: () {

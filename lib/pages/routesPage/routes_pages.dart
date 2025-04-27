@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hack_for_food/pages/assosiation_home_page.dart';
-import 'package:hack_for_food/pages/user_home_page.dart';
+import 'package:hack_for_food/pages/screens/assosiation_home_page.dart';
+import 'package:hack_for_food/pages/screens/user_home_page.dart';
 
 
 class RoutesPages extends StatefulWidget {

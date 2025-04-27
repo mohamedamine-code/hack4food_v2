@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hack_for_food/pages/settings.dart';
+import 'package:hack_for_food/pages/outils/settings.dart';
 import 'package:intl/intl.dart'; // Pour le formatage des dates
 
 class DonorProfileScreen extends StatelessWidget {

@@ -48,9 +48,20 @@ class _SignUpState extends State<SignUp> {
           key: _formKey,
           child: Column(
             children: [
+              const SizedBox(height: 50),
+              Icon(Icons.eco, size: 100, color: Colors.green.shade800),
               const SizedBox(height: 20),
-              Icon(Icons.eco, size: 80, color: Colors.green.shade800),
-              const SizedBox(height: 20),
+              Text(
+                    widget.userType == 'association'
+                        ? 'Enregistrement Association'
+                        : 'Enregistrement Donneur',
+                    style: TextStyle(
+                      color: Colors.green.shade900,
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
               _buildFormFields(),
               const SizedBox(height: 30),
               _buildSignUpButton(),

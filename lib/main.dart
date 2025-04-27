@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hack_for_food/pages/user_home_page.dart';
-import 'package:hack_for_food/test_widget/donner_Type_user.dart';
+import 'package:hack_for_food/pages/screens/user_home_page.dart';
+import 'package:hack_for_food/pages/routesPage/donner_Type_user.dart';
 
 void main() async {
   // Initialize Flutter bindings
