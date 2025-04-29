@@ -15,7 +15,7 @@ class AssosiationHomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<AssosiationHomePage> {
-   void _showNotifications(BuildContext context) {
+  void _showNotifications(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: const Text('Aucune nouvelle notification'),
@@ -25,6 +25,7 @@ class _HomePageState extends State<AssosiationHomePage> {
       ),
     );
   }
+
   final Color primaryColor = Colors.green.shade700;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -39,6 +40,7 @@ class _HomePageState extends State<AssosiationHomePage> {
     Navigator.push(context, MaterialPageRoute(builder: (context)=>AssociationProfileScreen()));
   }
   void go_profile(){}
+
   void _openSettings() {
     Navigator.pop(context);
     Navigator.push(
@@ -57,11 +59,11 @@ class _HomePageState extends State<AssosiationHomePage> {
   @override
   Widget build(BuildContext context) {
     List MyList=[
-    ['List des Don','assets/img/file.png',Colors.green,go_tolist],
+    ['List des Dons','assets/img/file.png',Colors.green,go_tolist],
     ['Association','assets/img/boy.png',Colors.deepPurple,go_profile_assocition],
   ];
-
     return Scaffold(
+      key: _scaffoldKey,
       drawer: Drawer(
       backgroundColor: const Color(0xFFE8F5E9),
       child: ListView(
@@ -178,6 +180,7 @@ class _HomePageState extends State<AssosiationHomePage> {
           ),
         ),
       ),
+
     );
   }
 }

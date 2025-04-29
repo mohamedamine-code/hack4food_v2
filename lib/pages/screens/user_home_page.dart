@@ -10,10 +10,11 @@ class UserHomePage extends StatefulWidget {
   const UserHomePage({super.key});
 
   @override
-  State<UserHomePage> createState() => _UserHomePageState(); // ✅ corrected
+  State<UserHomePage> createState() => _UserHomePageState();
 }
 
-class _UserHomePageState extends State<UserHomePage> with SingleTickerProviderStateMixin {
+class _UserHomePageState extends State<UserHomePage>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final Color primaryColor = Colors.green.shade700;
   final Color secondaryColor = const Color(0xFFE8F5E9);
@@ -64,7 +65,8 @@ class _UserHomePageState extends State<UserHomePage> with SingleTickerProviderSt
     Navigator.push(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => AddDonationScreen(),
+        pageBuilder:
+            (context, animation, secondaryAnimation) => AddDonationScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(opacity: animation, child: child);
         },
@@ -80,15 +82,13 @@ class _UserHomePageState extends State<UserHomePage> with SingleTickerProviderSt
   }
 
   void _logout() {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => DonorTypePage()),
-      
     );
   }
 
   void _openSettings() {
-    Navigator.pop(context);
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const SettingsScreen()),
@@ -159,9 +159,7 @@ class _UserHomePageState extends State<UserHomePage> with SingleTickerProviderSt
             icon: Icons.logout,
             title: 'Déconnexion',
             color: Colors.red,
-            onTap: (){
-              _logout();
-            },
+            onTap: _logout,
           ),
         ],
       ),
@@ -178,8 +176,8 @@ class _UserHomePageState extends State<UserHomePage> with SingleTickerProviderSt
       leading: Icon(icon, color: color),
       title: Text(title, style: TextStyle(color: color)),
       onTap: () {
-        onTap();
-        Navigator.pop(context);
+        Navigator.pop(context); // Ferme le drawer proprement
+        onTap(); // Puis effectue l'action
       },
     );
   }
@@ -208,12 +206,8 @@ class _UserHomePageState extends State<UserHomePage> with SingleTickerProviderSt
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        boxShadow:[
-          BoxShadow(
-                color: Colors.black,
-                spreadRadius: 1.5,
-                blurRadius: 5,
-              )
+        boxShadow: [
+          BoxShadow(color: Colors.black, spreadRadius: 1.5, blurRadius: 5),
         ],
         gradient: LinearGradient(
           begin: Alignment.topCenter,
